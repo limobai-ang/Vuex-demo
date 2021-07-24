@@ -1,14 +1,27 @@
 <template>
   <div>
-      <h3>当前最新的count值为：</h3>
-      <button>-1</button>
+      <h3>{{showNum}}</h3>
+      <button @click="subAsync">-1</button>
+      <input type="Number" v-model="n">
+      <button @click="subNAsync(n)">-n</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   data () {
-    return {}
+    return {
+      n: ''
+    }
+  },
+  methods: {
+    ...mapMutations(['sub', 'subN']),
+    ...mapActions(['subAsync', 'subNAsync'])
+  },
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['showNum'])
   }
 }
 </script>
